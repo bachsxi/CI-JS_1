@@ -29,7 +29,8 @@ controller.login = async loginInfo => {
                 uid: loginResult.user.uid,
                 email: loginResult.user.email
             });
-            setTimeout(function(){view.setActiveScreen('chat')},1000);
+            //Chuyển trang sau 2s
+            setTimeout(function(){view.setActiveScreen('chat')},1000); 
         }
         }catch(error){
             console.log(error);
