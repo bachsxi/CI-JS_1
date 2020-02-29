@@ -113,6 +113,21 @@ controller.register = async registerInfo => {
         }
         }
     }
-    
+};
+
+controller.addMessage = (newMessage) =>{
+//1. Tạo message của mình 
+const myMessage ={
+    sender: 'you',
+    content: newMessage
+}
+//2.Tạo message của bot
+const botMessage ={
+    content: newMessage,
+    sender: 'bot'
+}
+//3. Add message của mình vào
+view.addMessage(myMessage);
+view.addMessage(botMessage);
 
 };

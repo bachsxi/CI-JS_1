@@ -82,7 +82,30 @@ components.login = `
 `;
 
 //Show thông tin người dùng ở màn hình chat
-// components.chat = `
-// <div>Id: ${model.authUser.uid}</div>
-// <div>Email: ${model.authUser.email}</div>
-// `
+components.chat = `
+<div class = "chat-container">
+  <div class = "header">
+    MindX Chat
+  </div>
+
+  <div class="main">
+    <div class = "convo-detail">
+      <div id="convo-name" class="convo-header">
+        Code Intensive JS
+      </div>
+
+      <div class="convo-messages" id="convo-messages"  >
+
+      </div>
+
+      <form name="message-form" id="message-form">
+        <div class="convo-input">
+          <input id="message-input" name="message" placeholder="Type your message" />
+          <button class="button" tpye="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+`

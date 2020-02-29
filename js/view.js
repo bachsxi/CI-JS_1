@@ -36,25 +36,48 @@ view.setActiveScreen = screenName => {
       });
       break;
       case 'chat':
-        document.getElementById('app').innerHTML = `
-        <div>Id: ${model.authUser.uid}</div>
-        <div>Email: ${model.authUser.email}</div>
-        `;
-        const messaging = firebase.messaging();
-        messaging.requestPermission()
-        .then(function(){
-            console.log('Have permission');
-            return messaging.getToken(); 
+        document.getElementById('app').innerHTML = components.chat;
+        const messageForm = document.getElementById('message-form');
+        messageForm.addEventListener('submit',e =>{
+          e.preventDefault();
+          const newMessage =messageForm.message.value;
+          //1. Thêm message vào danh sách
+          controller.addMessage(newMessage);
+          //2. Reset Input về bị trí ban đầu
+          messageForm.message.value= '';
+          const out = document.getElementById("convo-messages")
+        setInterval(function() {
+          const isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 100
+          if (isScrolledToBottom) {
+            out.scrollTop = out.scrollHeight - out.clientHeight
+          }
+        }, 0000)
         })
-        .then(function(token){
-          console.log(token);
-        })
-        .catch(function(err){
-            console.log('Error Occured..');
-        })
+        
         break;
   }
 };
+
+// Hàm renđer ra message
+view.addMessage = messageObject =>{
+  //1. Tạo message container
+  const messageContainer = document.createElement('div');
+  //2. Thêm class cho container
+  messageContainer.classList.add('message-container');
+  messageContainer.classList.add(messageObject.sender);
+  //3. Tạo message
+  const message = document.createElement('div');
+  message.classList.add('message');
+  message.innerHTML = messageObject.content;
+
+  messageContainer.appendChild(message);
+  document
+    .getElementById('convo-messages')
+    .appendChild(messageContainer)
+
+}
+
+
 
 view.setError = (id,textError) => {
   document.getElementById(id).innerHTML =textError;
